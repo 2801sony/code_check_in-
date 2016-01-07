@@ -1,0 +1,50 @@
+<%@ page import="java.sql.*" %>
+<% Class.forName("sun.jdbc.odbc.JdbcOdbcDriver"); %>
+<HTML>
+    <HEAD>
+        <TITLE>Fetching Data From a Database</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>Database Lookup</H1>
+        <FORM ACTION="self.jsp" METHOD="POST">
+            Please enter the ID of the employee you want to find:
+            <BR>
+            <INPUT TYPE="TEXT" NAME="id">
+            <BR>
+            <INPUT TYPE="SUBMIT" value="Submit">
+        </FORM>
+        <H1>Fetching Data From a Database</H1>
+        <% 
+            Connection c = DriverManager.getConnection(
+                "jdbc:odbc:@localhost:1521:exe", "system", "long_short");
+            Statement s = connection.createStatement();
+            String id = request.getParameter("id");  
+            ResultSet rs = 
+                s.executeQuery("select * from customer where id = '" + id + "'") ; 
+            if(!rs.next()) {
+                out.println("Sorry, could not find that employee. " +
+                "Please <A HREF='tryAgain.html'>try again</A>.");
+            } else {
+        %>
+        <TABLE BORDER="1">
+            <TR>
+               <TH>id</TH>
+               <TH>name</TH>
+               <TH>description</TH>
+               <TH>email</TH>
+               <TH>dob</TH>
+           </TR>
+           <TR>
+               <TD> <%= resultset.getString(1) %> </TD>
+               <TD> <%= resultset.getString(2) %> </TD>
+               <TD> <%= resultset.getString(3) %> </TD>
+               <TD> <%= resultset.getString(4) %> </TD>
+               <TD> <%= resultset.getString(5) %> </TD>
+           </TR>
+       </TABLE>
+       <BR>
+       <% 
+           } 
+       %>
+    </BODY>
+</HTML>
