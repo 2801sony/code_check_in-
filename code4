@@ -1,0 +1,66 @@
+import java.sql.*;
+import java.util.*;
+
+public class test
+{
+	public static void main(String[] args)
+	
+	   throws Exception
+	   {
+       Class.forName("sun.jdbc.odbc.jdbcodbcDriver");
+		   Connection c= DriverManager.getConnection("jdbc.odbc:@localhost1521:exe","system","long_short");
+		   Statement  s= c.createStatement();
+		   string command = "insert into customer values (id,name,description,email,dob)";
+		   s.executeUpdate(command); 
+		   c.close();
+	   }
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form>
+  id:<br>
+  <input type="text" name="id">
+  <br>
+  name:<br>
+  <input type="text" name="name">
+  <br>
+  description:<br>
+  <input type="text" name="description">
+  <br>
+  email:<br>
+  <input type="text" name="email">
+  <br>
+  dob:<br>
+  <input type="text" name="dob">
+
+</form>
+
+<title> FORM </title>
+
+<script type = "text/javascript">
+<%
+string id = request.getParameter("id");
+string name = request.getParameter("name");
+string description = request.getParameter("description");
+string email = request.getParameter("email");
+string dob = request.getParameter("dob");
+
+test t = new test();
+t.submitData();
+%>
+function getvalues()
+{
+  var id = document.getElementById("id");
+  var name = document.getElementById("name");
+  var description = document.getElementById("description");
+  var email = document.getElementById("email");
+  var dob = document.getElementById("dob");
+  }
+  
+  
+  </script>
+
+
