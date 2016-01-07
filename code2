@@ -1,0 +1,194 @@
+//HTML_FILE 
+<script src="validate.js"></script>
+<form action ="success.html">
+
+  id:<br>
+  <input type="text" name="id">
+  <br>
+  name:<br>
+  <input type="text" name="name">
+  <br>
+  description:<br>
+  <input type="text" name="description">
+  <br>
+  email:<br>
+  <input type="text" name="email">
+  <br>
+  dob:<br>
+  <input type="text" name="dob">
+
+<input type='button' value='add'onclick='validateAndAdd()'><br>
+<input type='reset' value='reset'>
+<>div id='submit'></div>
+</form>
+
+//validate.js
+
+
+var records=new Array();
+function validateAndAdd()
+{
+  if(validate())
+   {
+    var myForm = document.forms[0];
+    var id     = myForm.id;
+    var name   = myForm name;
+    var description = myForm description;
+    var email  = myForm.email;
+    var dob    = myForm.dob;
+  
+    var record = new Array();
+    record[0]  = id.value;
+    
+    record[1]  = name.value;
+    
+    record[2]  = description.value;
+    
+    record[3]  = email.value;
+    
+    record[4]  = dob.value;
+
+    records[records.length]=record;
+    myForm.reset();
+    populateRecords();
+  }
+}
+
+
+function validate()
+{
+   var myForm = document.forms[0];
+   var id = myForm.id;
+   var name = myForm.name;
+   var description = myForm.description;
+   var email = myForm.email;
+   var dob = myForm.dob;
+
+if(id.value.length==0)
+{
+  alert("pls enter id");
+  id.focus();
+  return false;
+}
+
+
+if(name.value.length==0)
+{
+  alert("pls enter name");
+  name.focus();
+  return false;
+}
+
+
+if(description.value.length==0)
+{
+  alert("pls enter description");
+  description.focus();
+  return false;
+}
+
+
+if(email.value.length==0)
+{
+  alert("pls enter email");
+  email.focus();
+  return false;
+}
+
+
+if(dob.value.length==0)
+{
+  alert("pls enter dob");
+  dob.focus();
+  return false;
+}
+   
+
+function populateRecords()
+{
+  var recordsStr = "No records to Display";
+  var submitStr  = "";
+
+if(records.length>0)
+{
+  recordsStr="<table border='1'>";
+  recordStr + = "<tr>";
+  recordStr + = "<th>"id </th>;
+  recordStr + = "<th>"name </th>;
+  recordStr + = "<th>"decription </th>;
+  recordStr + = "<th>" email</th>;
+  recordStr + = "<th>" dob</th>;
+  recordStr + = "</tr>";
+ var record;
+for(var i=0;i<records.length;i++)
+{
+ record = records[i];
+ recordStr += "<tr>";
+ 
+ recordStr += "<td>";
+
+ recordStr += "<a href='#' onclick= 'retrieve("+i+")'>"+(i+1)+"</a>";
+
+ recordStr += "</td>";
+
+ recordStr += "<td>"+ record[0] + "</td>"
+ 
+ recordStr += "<td>"+ record[1] + "</td>"
+ 
+ recordStr += "<td>"+ record[2] + "</td>"
+ 
+ recordStr += "<td>"+ record[3] + "</td>"
+
+ recordStr += "</tr>";
+}
+ 
+ recordsStr + ="</table>";
+ submitStr = "<input type='submit' value=submit>";
+}
+ document.getElementById("records").innerHTML= recordsStr;
+ 
+ document.getElementById("submit").innerHTML= submitStr;
+}
+ function retrieve(index)
+{
+ var record = records[index];
+ var myForm = document.forms[0];
+ var id = myForm.id;
+ var name = myForm.name;
+ var description = myForm.description;
+ var email = myForm.email;
+ var dob = myForm.dob;
+ id.value = record[0];
+ name.value = record[1];
+ description.value = record[2];
+ email.value = record[3];
+ dob.value = record[4];
+
+
+records.splice(index,1);
+populateRecords();
+}
+
+
+ 
+
+ 
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
